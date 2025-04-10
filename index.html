@@ -1,111 +1,131 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>madeByMusicF</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>madeByMusicF</title>
 
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            overflow-x: hidden;
-            background: #000;
-        }
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      background: #000;
+    }
 
-        /* Блок с фоновым видео */
-        .intro-screen {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            z-index: 0;
-        }
+    /* Видео — фиксировано, всегда остаётся на фоне */
+    .background-video-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none; /* чтобы видео не мешало кликам */
+    }
 
-        .intro-screen video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    .background-video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-        }
+    /* Затемняющий слой */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
 
-        /* Содержимое страницы, которое начнётся после видео */
-        .scaled-content-wrapper {
-            transform: scale(0.9);
-            transform-origin: top center;
-        }
+    /* Первый экран (просто как секция над видео) */
+    .intro-screen {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      z-index: 1;
+      position: relative;
+    }
 
-        .content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            color: white;
-            padding: 60px 20px;
-        }
+    /* Уменьшенный контент после видео */
+    .scaled-content-wrapper {
+      transform: scale(0.9);
+      transform-origin: top center;
+      z-index: 1;
+      position: relative;
+    }
 
-        .gallery {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
+    .content {
+      text-align: center;
+      color: white;
+      padding: 60px 20px;
+    }
 
-        .image-container {
-            position: relative;
-            width: 75%;
-            cursor: default;
-            margin-bottom: 40px;
-        }
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
 
-        .background-img {
-            width: 100%;
-            display: block;
-            border-radius: 10px;
-        }
+    .image-container {
+      position: relative;
+      width: 75%;
+      cursor: default;
+      margin-bottom: 40px;
+    }
 
-        .gif-overlay {
-            width: 100%;
-            display: block;
-            border-radius: 10px;
-            margin-top: 0;
-        }
-    </style>
+    .background-img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .gif-overlay {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      margin-top: 0;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Первый экран с видео -->
-<div class="intro-screen">
-    <video autoplay loop muted playsinline>
-        <source src="glad.mp4" type="video/mp4">
-        Ваш браузер не поддерживает видео тег.
-    </video>
-    <div class="overlay"></div>
+<!-- Видео фон (всегда фиксировано на фоне) -->
+<div class="background-video-wrapper">
+  <video autoplay loop muted playsinline>
+    <source src="glad.mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео тег.
+  </video>
 </div>
 
-<!-- Основное содержимое -->
-<div class="scaled-content-wrapper">
-    <div class="content">
-        <h2>made_by_MusicFord</h2>
+<!-- Затемнение поверх видео -->
+<div class="overlay"></div>
 
-        <div class="gallery" id="gallery">
-            <div class="image-container">
-                <img src="23.png" class="background-img" alt="Фон 1">
-            </div>
-            <!-- Добавляй ещё, если надо -->
-        </div>
+<!-- Первый экран -->
+<div class="intro-screen">
+  <h1>made_by_MusicFord</h1>
+</div>
+
+<!-- Контент под первым экраном -->
+<div class="scaled-content-wrapper">
+  <div class="content">
+    <h2>Галерея</h2>
+    <div class="gallery" id="gallery">
+      <div class="image-container">
+        <img src="23.png" class="background-img" alt="Фон 1">
+      </div>
+      <!-- Добавляй картинки по желанию -->
     </div>
+  </div>
 </div>
 
 </body>
