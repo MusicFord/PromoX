@@ -10,12 +10,12 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      scroll-behavior: smooth;
       height: 100%;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
-    /* Видео на фоне */
+    /* Видео фон */
     .background-video-wrapper {
       position: fixed;
       top: 0; left: 0;
@@ -41,13 +41,12 @@
       z-index: -1;
     }
 
-    /* Отступ вниз, чтобы видео было видно первым */
+    /* Отступ вниз чтобы видео было видно */
     .spacer {
       height: 100vh;
-      width: 100%;
     }
 
-    /* Уменьшение масштаба содержимого */
+    /* Уменьшение содержимого */
     .scaled-content-wrapper {
       transform: scale(0.9);
       transform-origin: top center;
@@ -83,68 +82,33 @@
       position: relative;
       z-index: 10;
     }
-
-    /* Анимация появления */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
   </style>
 </head>
 <body>
 
-  <!-- Видео на фоне -->
+  <!-- Видео -->
   <div class="background-video-wrapper">
     <video autoplay loop muted playsinline>
       <source src="glad.mp4" type="video/mp4" />
     </video>
   </div>
 
-  <!-- Затемнение поверх видео -->
+  <!-- Затемнение -->
   <div class="overlay"></div>
 
-  <!-- Прокрутка вниз до содержимого -->
+  <!-- Прокрутка вниз -->
   <div class="spacer"></div>
 
-  <!-- Основной контент -->
+  <!-- Контент -->
   <div class="scaled-content-wrapper">
-    <h2 class="fade-in">made_by_MusicFord</h2>
+    <h2>made_by_MusicFord</h2>
 
     <div class="gallery" id="gallery">
-      <div class="image-container fade-in">
+      <div class="image-container">
         <img src="23.png" class="background-img" alt="Фон 1">
       </div>
     </div>
   </div>
-
-  <!-- Скрипт для появления при скролле -->
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-
-    window.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.fade-in').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight) {
-          el.classList.add('visible');
-        } else {
-          observer.observe(el);
-        }
-      });
-    });
-  </script>
 
 </body>
 </html>
