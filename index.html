@@ -9,30 +9,29 @@
         html, body {
             margin: 0;
             padding: 0;
-            height: 100%;
             font-family: Arial, sans-serif;
             overflow-x: hidden;
+            background: #000;
         }
 
-        /* Контейнер для видео и затемнения */
-        .background-wrapper {
-            position: fixed;
+        /* Блок с фоновым видео */
+        .intro-screen {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .intro-screen video {
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
-
-        /* Видео */
-        #background-video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        /* Затемнение */
         .overlay {
             position: absolute;
             top: 0;
@@ -40,13 +39,12 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
         }
 
-        /* Контейнер для уменьшенного содержимого */
+        /* Содержимое страницы, которое начнётся после видео */
         .scaled-content-wrapper {
-            transform: scale(0.9); /* Уменьшаем всё на 10% */
-            transform-origin: top center; /* Центрируем масштаб */
+            transform: scale(0.9);
+            transform-origin: top center;
         }
 
         .content {
@@ -54,7 +52,7 @@
             z-index: 1;
             text-align: center;
             color: white;
-            padding: 40px 20px;
+            padding: 60px 20px;
         }
 
         .gallery {
@@ -87,16 +85,16 @@
 </head>
 <body>
 
-<!-- Обёртка для фонового видео и затемнения -->
-<div class="background-wrapper">
-    <video autoplay loop muted playsinline id="background-video">
+<!-- Первый экран с видео -->
+<div class="intro-screen">
+    <video autoplay loop muted playsinline>
         <source src="glad.mp4" type="video/mp4">
         Ваш браузер не поддерживает видео тег.
     </video>
     <div class="overlay"></div>
 </div>
 
-<!-- Уменьшенное содержимое -->
+<!-- Основное содержимое -->
 <div class="scaled-content-wrapper">
     <div class="content">
         <h2>made_by_MusicFord</h2>
@@ -105,7 +103,7 @@
             <div class="image-container">
                 <img src="23.png" class="background-img" alt="Фон 1">
             </div>
-            <!-- Можно добавить другие картинки -->
+            <!-- Добавляй ещё, если надо -->
         </div>
     </div>
 </div>
