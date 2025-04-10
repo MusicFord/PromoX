@@ -11,9 +11,10 @@
       padding: 0;
       font-family: Arial, sans-serif;
       overflow-x: hidden;
-      
+    
     }
 
+    /* Фоновое видео */
     .background-video-wrapper {
       position: fixed;
       top: 0;
@@ -85,14 +86,7 @@
       border-radius: 10px;
     }
 
-    .gif-overlay {
-      width: 100%;
-      display: block;
-      border-radius: 10px;
-      margin-top: 0;
-    }
-
-    /* ===== Анимация появления ===== */
+    /* Анимация появления */
     .fade-in {
       opacity: 0;
       transform: translateY(30px);
@@ -115,6 +109,7 @@
   </video>
 </div>
 
+<!-- Затемнение -->
 <div class="overlay"></div>
 
 <!-- Первый экран -->
@@ -122,20 +117,19 @@
   <h1>made_by_MusicFord</h1>
 </div>
 
-<!-- Контент -->
+<!-- Основной контент -->
 <div class="scaled-content-wrapper">
   <div class="content fade-in">
-    
+    <h2>Галерея</h2>
     <div class="gallery" id="gallery">
       <div class="image-container fade-in">
         <img src="23.png" class="background-img" alt="Фон 1">
       </div>
-      <!-- Больше картинок — просто добавь с классом fade-in -->
     </div>
   </div>
 </div>
 
-<!-- JavaScript для анимации -->
+<!-- JS для анимации -->
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
