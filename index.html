@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>madeByMusicF</title>
 
   <style>
@@ -11,7 +11,6 @@
       padding: 0;
       font-family: Arial, sans-serif;
       overflow-x: hidden;
-    
     }
 
     /* Фоновое видео */
@@ -54,7 +53,7 @@
     }
 
     .scaled-content-wrapper {
-    
+      transform: scale(0.9);
       transform-origin: top center;
       z-index: 1;
       position: relative;
@@ -64,6 +63,8 @@
       text-align: center;
       color: white;
       padding: 60px 20px;
+      position: relative;
+      z-index: 1;
     }
 
     .gallery {
@@ -78,6 +79,7 @@
       width: 75%;
       cursor: default;
       margin-bottom: 40px;
+      z-index: 1;
     }
 
     .background-img {
@@ -104,8 +106,8 @@
 <!-- Фоновое видео -->
 <div class="background-video-wrapper">
   <video autoplay loop muted playsinline>
-    <source src="glad.mp4" type="video/mp4">
-    Ваш браузер не поддерживает видео тег.
+    <source src="glad.mp4" type="video/mp4" />
+    Ваш браузер не поддерживает видео.
   </video>
 </div>
 
@@ -120,28 +122,31 @@
 <!-- Основной контент -->
 <div class="scaled-content-wrapper">
   <div class="content fade-in">
-
+    <h2>Галерея</h2>
     <div class="gallery" id="gallery">
       <div class="image-container fade-in">
-        <img src="23.png" class="background-img" alt="Фон 1">
+        <img src="23.png" class="background-img" alt="Фон 1" />
       </div>
     </div>
   </div>
 </div>
 
-<!-- JS для анимации -->
+<!-- JavaScript для появления элементов -->
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // Чтобы не дёргалось постоянно
       }
     });
   }, {
-    threshold: 0.1
+    threshold: 0.2 // лучше видно появление
   });
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
 </script>
 
 </body>
