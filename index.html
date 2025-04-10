@@ -11,10 +11,9 @@
       padding: 0;
       font-family: Arial, sans-serif;
       overflow-x: hidden;
-      background: #000;
+      
     }
 
-    /* Видео — фиксировано, всегда остаётся на фоне */
     .background-video-wrapper {
       position: fixed;
       top: 0;
@@ -23,7 +22,7 @@
       height: 100%;
       z-index: -2;
       overflow: hidden;
-      pointer-events: none; /* чтобы видео не мешало кликам */
+      pointer-events: none;
     }
 
     .background-video-wrapper video {
@@ -32,7 +31,6 @@
       object-fit: cover;
     }
 
-    /* Затемняющий слой */
     .overlay {
       position: fixed;
       top: 0;
@@ -43,7 +41,6 @@
       z-index: -1;
     }
 
-    /* Первый экран (просто как секция над видео) */
     .intro-screen {
       height: 100vh;
       display: flex;
@@ -55,7 +52,6 @@
       position: relative;
     }
 
-    /* Уменьшенный контент после видео */
     .scaled-content-wrapper {
       transform: scale(0.9);
       transform-origin: top center;
@@ -95,11 +91,23 @@
       border-radius: 10px;
       margin-top: 0;
     }
+
+    /* ===== Анимация появления ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
 
-<!-- Видео фон (всегда фиксировано на фоне) -->
+<!-- Фоновое видео -->
 <div class="background-video-wrapper">
   <video autoplay loop muted playsinline>
     <source src="glad.mp4" type="video/mp4">
@@ -107,26 +115,40 @@
   </video>
 </div>
 
-<!-- Затемнение поверх видео -->
 <div class="overlay"></div>
 
 <!-- Первый экран -->
-<div class="intro-screen">
+<div class="intro-screen fade-in">
   <h1>made_by_MusicFord</h1>
 </div>
 
-<!-- Контент под первым экраном -->
+<!-- Контент -->
 <div class="scaled-content-wrapper">
-  <div class="content">
+  <div class="content fade-in">
     <h2>Галерея</h2>
     <div class="gallery" id="gallery">
-      <div class="image-container">
+      <div class="image-container fade-in">
         <img src="23.png" class="background-img" alt="Фон 1">
       </div>
-      <!-- Добавляй картинки по желанию -->
+      <!-- Больше картинок — просто добавь с классом fade-in -->
     </div>
   </div>
 </div>
+
+<!-- JavaScript для анимации -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
