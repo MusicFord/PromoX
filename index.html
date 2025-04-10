@@ -84,3 +84,31 @@
             margin-top: 0;
         }
     </style>
+</head>
+<body>
+
+<!-- Обёртка для фонового видео и затемнения -->
+<div class="background-wrapper">
+    <video autoplay loop muted playsinline id="background-video">
+        <source src="glad.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео тег.
+    </video>
+    <div class="overlay"></div>
+</div>
+
+<!-- Уменьшенное содержимое -->
+<div class="scaled-content-wrapper">
+    <div class="content">
+        <h2>made_by_MusicFord</h2>
+
+        <div class="gallery" id="gallery">
+            <div class="image-container">
+                <img src="23.png" class="background-img" alt="Фон 1">
+            </div>
+            <!-- Можно добавить другие картинки -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
