@@ -15,7 +15,7 @@
       overflow-x: hidden;
     }
 
-    /* Фоновое видео */
+    /* Видео на фоне */
     .background-video-wrapper {
       position: fixed;
       top: 0; left: 0;
@@ -41,13 +41,13 @@
       z-index: -1;
     }
 
-    /* Сдвиг контента вниз */
+    /* Отступ вниз, чтобы фон сначала был виден */
     .spacer {
       height: 100vh;
       width: 100%;
     }
 
-    /* Уменьшенный контент */
+    /* Уменьшенный блок */
     .scaled-content-wrapper {
       transform: scale(0.9);
       transform-origin: top center;
@@ -82,7 +82,7 @@
       border: 3px solid #fff;
     }
 
-    /* Плавная анимация при скролле */
+    /* Анимация при скролле */
     .fade-in {
       opacity: 0;
       transform: translateY(30px);
@@ -97,7 +97,7 @@
 </head>
 <body>
 
-  <!-- Фон видео -->
+  <!-- Видео на фоне -->
   <div class="background-video-wrapper">
     <video autoplay loop muted playsinline>
       <source src="glad.mp4" type="video/mp4" />
@@ -107,10 +107,10 @@
   <!-- Затемнение -->
   <div class="overlay"></div>
 
-  <!-- Отступ вниз на весь экран -->
+  <!-- Отступ, чтобы контент начинался после видео -->
   <div class="spacer"></div>
 
-  <!-- Контент с уменьшением -->
+  <!-- Контент -->
   <div class="scaled-content-wrapper">
     <h2 class="fade-in">made_by_MusicFord</h2>
 
@@ -121,6 +121,7 @@
     </div>
   </div>
 
+  <!-- Скрипт с IntersectionObserver + fallback -->
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -131,7 +132,17 @@
       });
     }, { threshold: 0.2 });
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    // При загрузке сразу отмечаем все элементы, которые уже на экране
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.fade-in').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          el.classList.add('visible');
+        } else {
+          observer.observe(el);
+        }
+      });
+    });
   </script>
 
 </body>
